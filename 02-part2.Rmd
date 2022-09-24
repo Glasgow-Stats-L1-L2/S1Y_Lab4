@@ -1,0 +1,250 @@
+# Part 2 - Confidence Intervals {-}
+
+## Data {-}
+
+```{r graphic3, echo = FALSE, out.width = "24%", fig.cap = "", fig.align="center", out.extra='style="float:right; padding:10px"'}
+knitr::include_graphics("images/climate-change.jpg")
+```
+
+A 2019 Pew Research report states the following:
+
+> Roughly six-in-ten U.S. adults (62%) say climate change is currently affecting their local community either a great deal or some, according to a new Pew Research Center survey.
+>
+> **Source:** [Most Americans say climate change impacts their community, but effects vary by region](https://www.pewresearch.org/fact-tank/2019/12/02/most-americans-say-climate-change-impacts-their-community-but-effects-vary-by-region/)
+
+In this part of the lab, we will assume this 62% is a true population proportion and learn about how sample proportions can vary from sample to sample by taking smaller samples from the population. We will first create our population assuming a population size of 100,000 (which is unrealistic, but it keeps the computing time down to a reasonable level for this lab). This means 62,000 (62%) of the adult population think climate change impacts their community, and the remaining 38,000 do not think so.
+
+We used the code below to construct the data frame for this problem. The data frame is constructed as before using the `tibble` function; refer to start of Lab 3 to understand what the code is doing.
+
+```{r us_adults}
+us_adults <- tibble(
+  climate_change_affects = c(rep("Yes", 62000), rep("No", 38000)))
+```
+
+The name of the data frame is `us_adults` and the name of the variable that contains responses to the question *"Do you think climate change is affecting your local community?"* is `climate_change_affects`.
+
+Similar to before, run the following code to obtain summary statistics to confirm we constructed the data frame correctly and to visualise the distribution of these responses using a bar plot.
+
+<br>
+
+### Exercise 6 {-}
+
+Using the code seen earlier in the lab, write code to produce summary statistics and produce a plot of the data showing how many people think climate change is affecting their local community and those who do not.
+
+`r hide("Hint")`
+Calculate the proportion of people who think climate change is affecting their local community `p` using `count` and `mutate`. Then create a barplot using `geom_bar`.
+`r unhide()`
+
+```{r ex6_solution, webex.hide="Solution"}
+us_adults %>% 
+  count(climate_change_affects) %>% 
+  mutate(p = n /sum(n))
+
+ggplot(us_adults, aes(x = climate_change_affects)) + 
+  geom_bar(fill = "lightblue", width = 0.5) + 
+  labs(x = "", 
+       y = "", 
+       title = "Do you think climate change is affecting your local community?" ) +
+  coord_flip()
+```
+
+We'll start with a simple random sample of size 60 from the population.
+
+<br>
+
+### Exercise 7 {-}
+
+Create a sample of size 60 from the data and compute the percent of the adults in the sample think climate change affects their local community?
+
+`r hide("Hint")`
+Think about using code from earlier in the lab. Use `sample_n()` to draw a sample of size 60 and then calculate `p_hat` using `count` and `mutate`.
+`r unhide()`
+
+```{r ex7_solution, webex.hide="Solution"}
+sample <- us_adults %>% 
+  sample_n(60)
+
+sample %>% 
+  count(climate_change_affects) %>% 
+  mutate(p_hat = n /sum(n))
+```
+
+```{r MCQ10, echo=FALSE}
+opts_Q10 <- sample(c("Identical",
+                     "Very different",
+                     answer = "Slightly similar"))
+```
+
+<br>
+
+**What would you expect another student's proportion to be?**
+`r longmcq(opts_Q10)`
+
+`r hide("Hint")`
+Think about multiple samples taken from the same population, refer to materials in OpenLearn Section 5.2 to help.
+`r unhide()`
+
+<br>
+
+## Computing Confidence Intervals {-}
+
+Returning to the motivation for this lab: based on this sample, what can you infer about the population? With just one sample, the best estimate of the proportion of US adults who think climate change affects their local community would be the sample proportion, usually denoted as $\hat{p}$ (here we are calling it `p_hat`). That serves as a good **point estimate**, but it would be useful to also communicate how uncertain we are of that estimate. This uncertainty can be quantified using a **confidence interval**, which is an example of an **interval estimate**. See Section 5.2 Page 181-183 <a href="https://www.openintro.org/redirect.php?go=os4_tablet&referrer=/stat/os4.php#page=181" target="_blank">OpenIntro Page 181</a>
+
+Remembering that the **standard error (SE)** of a point estimate is the same as the standard deviation of the point estimate, we calculate a 95% confidence interval for a sample proportion by adding and subtracting 1.96 $\times$ **standard error (SE)** to the point estimate.
+
+$$ \hat{p} \pm 1.96 * SE $$
+
+Or simply in R using:
+
+```{r ci, eval = FALSE}
+se <- sd(sample) / sqrt(n)
+lower <- p_hat - 1.96 * SE
+upper <- p_hat + 1.96 * SE
+c(lower, upper) 
+```
+
+This is an important inference that we've just made: even though we don't know what the full population looks like, we're 95% confident that the true population proportion lies between the lower and upper values.
+
+However, some conditions need to be made for the confidence interval to be valid.
+
+```{r MCQ11, echo=FALSE}
+opts_Q11.1 <- sample(c(answer = "Independence assumption is valid",
+                     "Data comes from a binomial distribution",
+                     "The distribution is skewed but it is allowed with a small sample size"))
+opts_Q11.2 <- c(answer = "Data comes from a normal distribution")
+opts_Q11.3 <- c(answer = "The disribution is skewed but it is allowed with a large sample size")
+```
+
+<br>
+
+**What conditions must be met for this confidence to be valid?**
+`r longmcq(opts_Q11.1)`
+`r longmcq(opts_Q11.2)`
+`r longmcq(opts_Q11.3)`
+
+`r hide("Hint")`
+Think about the conditions the Central Limit Theorem needs to allow the interval to be computed as seen in OpenLearn Section 5.2.
+`r unhide()`
+
+<br>
+
+## Confidence Levels {-}
+
+In the last section, we used the phrase "95% confident" - but what does this mean?
+
+In this case we have the luxury of knowing the true population proportion since we constructed the data on the entire population.
+
+Run the following code to create a confidence interval from a sample of size 60.
+
+```{r ci60, eval=FALSE}
+sample <- us_adults %>%
+  sample_n(60)
+
+sample_pro <- proportions(table(sample))
+sample_pro <- sample_pro[2]
+
+sample_se <- sqrt(sample_pro * (1 - sample_pro) / 60)
+
+lower_vector <- sample_pro - 1.96 * sample_se / sqrt(60) 
+upper_vector <- sample_pro + 1.96 * sample_se / sqrt(60)
+
+ci <- c(lower_vector, upper_vector)
+
+ci
+```
+
+```{r MCQ12, echo=FALSE}
+opts_Q12 <- sample(c("Yes, each certainly would",
+                     "No, each certainly wouldn't",
+                     answer = "Each would with 95% confidence"))
+```
+
+<br>
+
+**If you were to repeat this simulation again and again, would each confidence interval capture the true population proportion of US adults who think climate change affects their local community?**
+`r longmcq(opts_Q12)`
+
+`r hide("Hint")`
+Think about what the interval is estimating and with what level of confidence.
+`r unhide()`
+
+<br>
+
+If we were to collect all the confidence intervals produced in the console above by all the students in S1Y, each student should have produced a slightly different confidence interval because they were each based on different random samples.
+
+```{r MCQ13, echo=FALSE}
+opts_Q13 <- sample(c("2.5%",
+                     "5%",
+                     answer = "95%"))
+```
+
+<br>
+
+**What proportion of those intervals would you expect to capture the true population mean?**
+`r longmcq(opts_Q13)`
+
+`r hide("Hint")`
+Think about what repeatedly sampling would do to the interval and the confidence it produces.
+`r unhide()`
+
+<br>
+
+We will now collect many samples to learn more about how sample proportions and confidence intervals constructed based on those samples vary from one sample to another. This will be done by:
+
+1.  Obtain a random sample.
+2.  Calculate the sample proportion, and use these to calculate and store the lower and upper bounds of the confidence intervals.
+3.  Repeat these steps for a large number of times.
+
+<br>
+
+### Exercise 8 {-}
+
+Run the code below and change the sample size and confidence level. This will show the effect these factors have on the confidence intervals. When running this code consider the true population proportion and if the intervals contain this value.
+
+**Note** The confidence level we have been using is 95% which refers to 1.96 within the code. This is used as 95% of the area of a normal distribution is within 1.96 standard deviations of the mean, as seen on <a href="https://www.openintro.org/redirect.php?go=os4_tablet&referrer=/stat/os4.php#page=183">OpenIntro Page 183</a>. Other confidence levels can be used but commonly: 99% uses $\pm$ 2.58, 97% uses $\pm$ 2.17, 95% uses $\pm$ 1.96, 90% uses $\pm$ 1.64, 75% uses $\pm$ 0.67.
+
+```{r ciplot, eval=FALSE}
+n <- 60
+sample <- us_adults %>%
+  sample_n(n)
+
+sample_pro <- proportions(table(sample))
+sample_pro <- sample_pro[2]
+
+sample_se <- sqrt(sample_pro * (1 - sample_pro) / n)
+
+#90% Confidence Level
+lower_vector <- sample_pro - 1.64* sample_se / sqrt(n) 
+upper_vector <- sample_pro + 1.64 * sample_se / sqrt(n)
+ci <- c(lower_vector, upper_vector)
+c("90% CI", paste(round(ci,3)))
+
+#95% Confidence Level
+lower_vector <- sample_pro - 1.96 * sample_se / sqrt(n) 
+upper_vector <- sample_pro + 1.96 * sample_se / sqrt(n)
+ci <- c(lower_vector, upper_vector)
+c("95% CI", paste(round(ci,3)))
+
+#99% Confidence Level
+lower_vector <- sample_pro - 2.58 * sample_se / sqrt(n) 
+upper_vector <- sample_pro + 2.58 * sample_se / sqrt(n)
+ci <- c(lower_vector, upper_vector)
+c("99% CI", paste(round(ci,3)))
+```
+
+```{r MCQ14, echo=FALSE}
+opts_Q14 <- sample(c(answer = "Interval with a larger confidence level",
+                     "Interval with a larger sample size"))
+```
+
+<br>
+
+**Which interval would you expect to be wider?**
+`r longmcq(opts_Q14)`
+
+`r hide("Hide")`
+Increasing the sample size decreases the width of the confidence interval, this is because it decreases the standard error reducing the variability of the interval.
+`r unhide()`
+
+<br>
+
