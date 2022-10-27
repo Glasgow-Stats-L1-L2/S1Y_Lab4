@@ -231,8 +231,8 @@ We will first create our population assuming a population size of 100,000 (Which
 ## 6 Benefits</code></pre>
 <p><br></p>
 <p><strong>What would this line of code return? <code>c(rep(x, 1000), rep(y, 500))</code></strong></p>
-<div id="radio_NDGKSRGJQX" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NDGKSRGJQX" value="answer"></input> <span>vector of length 1500 with 1000 values of x and 500 values of y</span></label><label><input type="radio" autocomplete="off" name="radio_NDGKSRGJQX" value=""></input> <span>matrix with 1000 rows of x and 500 columns of y</span></label><label><input type="radio" autocomplete="off" name="radio_NDGKSRGJQX" value=""></input> <span>vector of length 500 all y</span></label><label><input type="radio" autocomplete="off" name="radio_NDGKSRGJQX" value=""></input> <span>vector of length 1000 all x</span></label>
+<div id="radio_XXMWKWTOYV" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XXMWKWTOYV" value="answer"></input> <span>vector of length 1500 with 1000 values of x and 500 values of y</span></label><label><input type="radio" autocomplete="off" name="radio_XXMWKWTOYV" value=""></input> <span>matrix with 1000 rows of x and 500 columns of y</span></label><label><input type="radio" autocomplete="off" name="radio_XXMWKWTOYV" value=""></input> <span>vector of length 500 all y</span></label><label><input type="radio" autocomplete="off" name="radio_XXMWKWTOYV" value=""></input> <span>vector of length 1000 all x</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -242,64 +242,74 @@ Hint
 </div>
 <p><br></p>
 <ul>
-<li><strong>Run the following code to calculate the proportion of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.</strong></li>
+<li><strong>Run the following code to calculate and view the counts and proportions of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.</strong></li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="part-1---sampling-distributions.html#cb5-1" aria-hidden="true" tabindex="-1"></a>global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb5-2"><a href="part-1---sampling-distributions.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb5-3"><a href="part-1---sampling-distributions.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<span id="cb5-2"><a href="part-1---sampling-distributions.html#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span>  <span class="co"># This creates a new variable called &quot;n&quot; containing the counts of the different values in &quot;scientist_work&quot;</span></span>
+<span id="cb5-3"><a href="part-1---sampling-distributions.html#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="co"># This creates a new variable called &quot;p&quot; containing the proportions of the different values in &quot;scientist_work&quot;</span></span></code></pre></div>
+<pre><code>## # A tibble: 2 x 3
+##   scientist_work      n     p
+##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
+## 1 Benefits        80000   0.8
+## 2 Doesn&#39;t benefit 20000   0.2</code></pre>
 <ul>
-<li><strong>Run the following code to produce a bar plot to visually summarise the distribution of the responses.</strong></li>
+<li><strong>Run the following code to produce this bar plot to visually summarise the distribution of the responses.</strong></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="part-1---sampling-distributions.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(global_monitor, <span class="fu">aes</span>(<span class="at">x =</span> scientist_work)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="part-1---sampling-distributions.html#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb6-3"><a href="part-1---sampling-distributions.html#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
-<span id="cb6-4"><a href="part-1---sampling-distributions.html#cb6-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population counts of beliefs in the work scientists do&quot;</span>) <span class="sc">+</span></span>
-<span id="cb6-5"><a href="part-1---sampling-distributions.html#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() </span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="part-1---sampling-distributions.html#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(global_monitor, <span class="fu">aes</span>(<span class="at">x =</span> scientist_work)) <span class="sc">+</span></span>
+<span id="cb7-2"><a href="part-1---sampling-distributions.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb7-3"><a href="part-1---sampling-distributions.html#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb7-4"><a href="part-1---sampling-distributions.html#cb7-4" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Population counts of beliefs in the work scientists do&quot;</span>) <span class="sc">+</span></span>
+<span id="cb7-5"><a href="part-1---sampling-distributions.html#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() </span></code></pre></div>
 <p><img src="main_files/figure-html/barplot-1.png" width="672" /></p>
 <p>The function <code>coord_flip</code> flips the coordinates of the plot to create a horizontal bar plot.</p>
 <p><br></p>
 </div>
 <div id="unknown-sampling-distribution" class="section level2 unnumbered hasAnchor">
 <h2>Unknown Sampling Distribution<a href="part-1---sampling-distributions.html#unknown-sampling-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>In this data set, we have access to the entire population of 100000 people, but this is almost never the case in real life. Gathering information on an entire population is often extremely costly or impossible.
+<p>In this data set, we have access to the entire population of 100000 people, but this is (almost) never the case in real life. Gathering information on an entire population is often extremely costly or impossible.
 Because of this, we often take a sample of the population and use that to understand the properties of the population.</p>
-<p>If you are interested in estimating the proportion of people who don't think the work scientists do benefits them, you can use the <code>sample_n</code> command to survey the population. This following code collects a simple random sample of size 50 from the <code>global_monitor</code> data set, and assigns the result to <code>sample1</code>.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="part-1---sampling-distributions.html#cb7-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb7-2"><a href="part-1---sampling-distributions.html#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">50</span>)</span></code></pre></div>
+<p>If you are interested in estimating the proportion of people who don't think the work scientists do benefits them, you can use the <code>sample_n</code> command to "survey" the population.</p>
+<ul>
+<li><strong>Run this code to take a simple random sample of size 50 from the <code>global_monitor</code> data set and assign the result to a new object called <code>sample1</code>.</strong></li>
+</ul>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="part-1---sampling-distributions.html#cb8-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb8-2"><a href="part-1---sampling-distributions.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">50</span>)</span></code></pre></div>
 <p>This is similar to randomly drawing names from a hat that contains the names of everyone in the population.
-Working with these 50 names is considerably simpler than working with all 100,000 people in the population.</p>
+Surveying 50 people is considerably simpler than surveying all 100,000 people in the population.</p>
 <p><br></p>
 <div id="exercise-1" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 1<a href="part-1---sampling-distributions.html#exercise-1" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Write code to produce the summary statistics and a bar plot for the results of the sample.</p>
+<ul>
+<li><strong>Write and run code to produce the summary statistics (i.e. proportions) and a bar plot of the observations in the sample of 50.</strong></li>
+</ul>
 <div class="webex-solution">
 <button>
 Hint
 </button>
-<p>Although the <code>sample_n</code> function takes a random sample of observations (i.e. rows) from the data set, you can still refer to the variables in the dataset with the same names. Code presented earlier for visualising and summarising the population data will still be useful for the sample, however be careful to not label your proportion <code>p</code> since you're now calculating a sample statistic so use the label <code>p_hat</code> instead.</p>
+<p>Although the <code>sample_n</code> function takes a random sample of observations (i.e. rows) from the data set, you can still refer to the variables in the dataset with the same names. Code presented earlier for visualising and summarising the population data will still be useful for the sample, however be careful to not label your proportion <code>p</code> since you're now calculating a sample statistic so use a label like <code>p_hat</code> instead.</p>
 </div>
 <div class="webex-solution">
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="part-1---sampling-distributions.html#cb8-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="part-1---sampling-distributions.html#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
-<span id="cb8-3"><a href="part-1---sampling-distributions.html#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="part-1---sampling-distributions.html#cb9-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="part-1---sampling-distributions.html#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-3"><a href="part-1---sampling-distributions.html#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   scientist_work      n p_hat
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 Benefits           40   0.8
-## 2 Doesn&#39;t benefit    10   0.2</code></pre>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="part-1---sampling-distributions.html#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sample1, <span class="fu">aes</span>(<span class="at">x =</span> scientist_work)) <span class="sc">+</span> </span>
-<span id="cb10-2"><a href="part-1---sampling-distributions.html#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb10-3"><a href="part-1---sampling-distributions.html#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Do you believe that the work scientists do benefit people like you?&quot;</span> ) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="part-1---sampling-distributions.html#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
+## 1 Benefits           39  0.78
+## 2 Doesn&#39;t benefit    11  0.22</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="part-1---sampling-distributions.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sample1, <span class="fu">aes</span>(<span class="at">x =</span> scientist_work)) <span class="sc">+</span> </span>
+<span id="cb11-2"><a href="part-1---sampling-distributions.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">fill =</span> <span class="st">&quot;lightblue&quot;</span>, <span class="at">width =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb11-3"><a href="part-1---sampling-distributions.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;&quot;</span>, <span class="at">y =</span> <span class="st">&quot;&quot;</span>, <span class="at">title =</span> <span class="st">&quot;Do you believe that the work scientists do benefit people like you?&quot;</span> ) <span class="sc">+</span></span>
+<span id="cb11-4"><a href="part-1---sampling-distributions.html#cb11-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>()</span></code></pre></div>
 <p><img src="main_files/figure-html/ex1_solution-1.png" width="672" /></p>
 </div>
 <p><br></p>
 <p><strong>Think about how the proportions in your sample compare with the distribution of the population. Would you expect the sample distribution to be?</strong></p>
-<div id="radio_JULMDJLXCR" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_JULMDJLXCR" value=""></input> <span>Very different to the population distribution</span></label><label><input type="radio" autocomplete="off" name="radio_JULMDJLXCR" value="answer"></input> <span>Similar to the population distribution</span></label>
+<div id="radio_KHCWGLZUBM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_KHCWGLZUBM" value=""></input> <span>Very different to the population distribution</span></label><label><input type="radio" autocomplete="off" name="radio_KHCWGLZUBM" value="answer"></input> <span>Similar to the population distribution</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -308,32 +318,37 @@ Hint
 <p>Think about the sample and the distribution it comes from, relate to materials within OpenLearn Section 5.1.</p>
 </div>
 <p><br></p>
-<p>If we're interested in estimating the proportion of all people who do not believe that the work scientists do benefits them, but we do not have access to the population data, our best single guess is the sample mean. We can calculate and display using the following code.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="part-1---sampling-distributions.html#cb11-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="part-1---sampling-distributions.html#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb11-3"><a href="part-1---sampling-distributions.html#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<p>If we're interested in estimating the proportion of all people who do not believe that the work scientists do benefits them, but we do not have access to the population data, our best single guess is the sample proportion.</p>
+<ul>
+<li>**Run this code to calculate and display the sample proportion.</li>
+</ul>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="part-1---sampling-distributions.html#cb12-1" aria-hidden="true" tabindex="-1"></a>sample1 <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="part-1---sampling-distributions.html#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="part-1---sampling-distributions.html#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   scientist_work      n p_hat
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 Benefits           40   0.8
-## 2 Doesn&#39;t benefit    10   0.2</code></pre>
-<p>Depending on the 50 people selected, your estimate could be a bit above or a bit below the population proportion of 0.2. In general, though, the sample proportion turns out to be a pretty good estimate of the true population proportion, and you were able to get it by sampling less than 1% of the population, 50 out of 100000.</p>
+## 1 Benefits           39  0.78
+## 2 Doesn&#39;t benefit    11  0.22</code></pre>
+<p>Depending on the 50 people sampled, your estimate could be a bit above or a bit below the population proportion of 0.2 (or in some cases exactly equal to 0.2). In general, though, the sample proportion turns out to be a pretty good estimate of the true population proportion, and you were able to get it by sampling less than 1% of the population, 50 out of 100000.</p>
 <p><br></p>
 <p><strong>Would you expect the sample proportion to match the sample proportion of another student's sample?</strong></p>
-<div id="radio_URYDAZFYQD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_URYDAZFYQD" value="answer"></input> <span>Similar but not necessarily the same</span></label><label><input type="radio" autocomplete="off" name="radio_URYDAZFYQD" value=""></input> <span>Completely different</span></label><label><input type="radio" autocomplete="off" name="radio_URYDAZFYQD" value=""></input> <span>Exactly the same</span></label>
+<div id="radio_UKJUBBILJW" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UKJUBBILJW" value="answer"></input> <span>Similar but not necessarily the same</span></label><label><input type="radio" autocomplete="off" name="radio_UKJUBBILJW" value=""></input> <span>Completely different</span></label><label><input type="radio" autocomplete="off" name="radio_UKJUBBILJW" value=""></input> <span>Exactly the same</span></label>
 </div>
 <div class="webex-solution">
 <button>
 Hint
 </button>
-<p>As the sample is taken randomly from the population you would expect it to be slightly similar to other draws.</p>
+<p>As each sample is taken randomly from the population you would expect them to be similar but not necessarily identical to each other.</p>
 </div>
 <p><br></p>
 </div>
 <div id="exercise-2" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 2<a href="part-1---sampling-distributions.html#exercise-2" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Take a second sample, also of size 50, and call it <code>sample2</code>. Compare the proportion of people who do not believe that the work scientists do benefits them in <code>sample1</code> and <code>sample2</code>.</p>
+<ul>
+<li><strong>Take a second sample, also of size 50, and call it <code>sample2</code>. Compare the proportion of people who do not believe that the work scientists do benefits them in <code>sample1</code> and <code>sample2</code>.</strong></li>
+</ul>
 <div class="webex-solution">
 <button>
 Hint
@@ -344,20 +359,22 @@ Hint
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="part-1---sampling-distributions.html#cb13-1" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
-<span id="cb13-2"><a href="part-1---sampling-distributions.html#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">50</span>)</span>
-<span id="cb13-3"><a href="part-1---sampling-distributions.html#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="part-1---sampling-distributions.html#cb13-4" aria-hidden="true" tabindex="-1"></a>sample2 <span class="sc">%&gt;%</span> </span>
-<span id="cb13-5"><a href="part-1---sampling-distributions.html#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
-<span id="cb13-6"><a href="part-1---sampling-distributions.html#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="part-1---sampling-distributions.html#cb14-1" aria-hidden="true" tabindex="-1"></a>sample2 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
+<span id="cb14-2"><a href="part-1---sampling-distributions.html#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">50</span>)</span>
+<span id="cb14-3"><a href="part-1---sampling-distributions.html#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="part-1---sampling-distributions.html#cb14-4" aria-hidden="true" tabindex="-1"></a>sample2 <span class="sc">%&gt;%</span> </span>
+<span id="cb14-5"><a href="part-1---sampling-distributions.html#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-6"><a href="part-1---sampling-distributions.html#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   scientist_work      n p_hat
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 Benefits           39  0.78
-## 2 Doesn&#39;t benefit    11  0.22</code></pre>
+## 1 Benefits           38  0.76
+## 2 Doesn&#39;t benefit    12  0.24</code></pre>
 </div>
 <p><br></p>
-<p>Create 2 more samples, of size 100 and 1000 calling them <code>sample3</code> and <code>sample4</code>, and compare the proportion of people who do not believe that the work scientists do benefits them across all four samples.</p>
+<ul>
+<li><strong>Create 2 more samples, of size 100 and 1000 calling them <code>sample3</code> and <code>sample4</code>, and compare the proportion of people who do not believe that the work scientists do benefits them across all four samples.</strong></li>
+</ul>
 <div class="webex-solution">
 <button>
 Hint
@@ -368,33 +385,35 @@ Hint
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="part-1---sampling-distributions.html#cb15-1" aria-hidden="true" tabindex="-1"></a>sample3 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="part-1---sampling-distributions.html#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">100</span>)</span>
-<span id="cb15-3"><a href="part-1---sampling-distributions.html#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb15-4"><a href="part-1---sampling-distributions.html#cb15-4" aria-hidden="true" tabindex="-1"></a>sample3 <span class="sc">%&gt;%</span> </span>
-<span id="cb15-5"><a href="part-1---sampling-distributions.html#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
-<span id="cb15-6"><a href="part-1---sampling-distributions.html#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="part-1---sampling-distributions.html#cb16-1" aria-hidden="true" tabindex="-1"></a>sample3 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="part-1---sampling-distributions.html#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">100</span>)</span>
+<span id="cb16-3"><a href="part-1---sampling-distributions.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="part-1---sampling-distributions.html#cb16-4" aria-hidden="true" tabindex="-1"></a>sample3 <span class="sc">%&gt;%</span> </span>
+<span id="cb16-5"><a href="part-1---sampling-distributions.html#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-6"><a href="part-1---sampling-distributions.html#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   scientist_work      n p_hat
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 Benefits           81  0.81
-## 2 Doesn&#39;t benefit    19  0.19</code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="part-1---sampling-distributions.html#cb17-1" aria-hidden="true" tabindex="-1"></a>sample4 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
-<span id="cb17-2"><a href="part-1---sampling-distributions.html#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1000</span>)</span>
-<span id="cb17-3"><a href="part-1---sampling-distributions.html#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-4"><a href="part-1---sampling-distributions.html#cb17-4" aria-hidden="true" tabindex="-1"></a>sample4 <span class="sc">%&gt;%</span> </span>
-<span id="cb17-5"><a href="part-1---sampling-distributions.html#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
-<span id="cb17-6"><a href="part-1---sampling-distributions.html#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
+## 1 Benefits           82  0.82
+## 2 Doesn&#39;t benefit    18  0.18</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="part-1---sampling-distributions.html#cb18-1" aria-hidden="true" tabindex="-1"></a>sample4 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="part-1---sampling-distributions.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sample_n</span>(<span class="dv">1000</span>)</span>
+<span id="cb18-3"><a href="part-1---sampling-distributions.html#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="part-1---sampling-distributions.html#cb18-4" aria-hidden="true" tabindex="-1"></a>sample4 <span class="sc">%&gt;%</span> </span>
+<span id="cb18-5"><a href="part-1---sampling-distributions.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span> </span>
+<span id="cb18-6"><a href="part-1---sampling-distributions.html#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n))</span></code></pre></div>
 <pre><code>## # A tibble: 2 x 3
 ##   scientist_work      n p_hat
 ##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
-## 1 Benefits          779 0.779
-## 2 Doesn&#39;t benefit   221 0.221</code></pre>
+## 1 Benefits          826 0.826
+## 2 Doesn&#39;t benefit   174 0.174</code></pre>
 </div>
 <p><br></p>
-<p><strong>Looking at the new samples, of size 100 and 1000. Which would you think would provide a more precise estimate of the population mean?</strong></p>
-<div id="radio_ETZDZHHRWP" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ETZDZHHRWP" value=""></input> <span>Sample size 50</span></label><label><input type="radio" autocomplete="off" name="radio_ETZDZHHRWP" value=""></input> <span>Sample size 100</span></label><label><input type="radio" autocomplete="off" name="radio_ETZDZHHRWP" value="answer"></input> <span>Sample size 1000</span></label>
+<ul>
+<li><strong>Looking at the new samples, of size 100 and 1000. Which would you think would provide a more precise estimate of the population mean?</strong></li>
+</ul>
+<div id="radio_WAZRHNTWFF" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_WAZRHNTWFF" value=""></input> <span>Sample size 50</span></label><label><input type="radio" autocomplete="off" name="radio_WAZRHNTWFF" value=""></input> <span>Sample size 100</span></label><label><input type="radio" autocomplete="off" name="radio_WAZRHNTWFF" value="answer"></input> <span>Sample size 1000</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -405,29 +424,32 @@ Hint
 <p><br></p>
 <p>Not surprisingly, every time we take another random sample, you might get a different sample proportion. It's useful to get a sense of just how much variability in the sample proportions we should expect from sample to sample when estimating the population mean proportion in this way. The distribution of sample proportions, called the <em>sampling distribution (of the proportion)</em>, can help us understand this variability. See Section 5.1.2 <a href="https://www.openintro.org/redirect.php?go=os4_tablet&referrer=/stat/os4.php#page=181" target="_blank">OpenIntro Page 181</a></p>
 <p>Remember that in this lab we unusually had access to the population and therefore we can get an idea of the sampling distribution for the sample proportion by repeating the above steps many times.</p>
-<p>Here, we use the function <code>rep_sample_n</code> to take 15,000 different samples of size 50 from the population, calculate the proportion of <em>Science doesn't benefit</em> responses in each sample and store each result in a vector called <code>sample_props50</code>. The distribution of the proportions can then be visualised with a histogram.</p>
+<p>We can use the function <code>rep_sample_n</code> to take, say, 15,000 different samples of size 50 from the population, calculate the proportion of <em>Science doesn't benefit</em> responses in each sample and store each result in a vector called <code>sample_props50</code>. The distribution of the proportions can then be visualised with a histogram.</p>
 <p><strong>Note</strong> We specify that <code>replace = TRUE</code> since sampling distributions are constructed by sampling with replacement.</p>
 <p><br></p>
 </div>
 <div id="exercise-3" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 3<a href="part-1---sampling-distributions.html#exercise-3" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Run the following code to iterate 15000 samples of size 50 from the population.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="part-1---sampling-distributions.html#cb19-1" aria-hidden="true" tabindex="-1"></a>sample_props50 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb19-2"><a href="part-1---sampling-distributions.html#cb19-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb19-3"><a href="part-1---sampling-distributions.html#cb19-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb19-4"><a href="part-1---sampling-distributions.html#cb19-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb19-5"><a href="part-1---sampling-distributions.html#cb19-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
-<span id="cb19-6"><a href="part-1---sampling-distributions.html#cb19-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-7"><a href="part-1---sampling-distributions.html#cb19-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props50, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
-<span id="cb19-8"><a href="part-1---sampling-distributions.html#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb19-9"><a href="part-1---sampling-distributions.html#cb19-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
-<span id="cb19-10"><a href="part-1---sampling-distributions.html#cb19-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
-<span id="cb19-11"><a href="part-1---sampling-distributions.html#cb19-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Sample size = 50, Number of samples = 150&quot;</span>)</span></code></pre></div>
+<ul>
+<li><strong>Run the following code to iterate 15000 samples of size 50 from the population and display a histogram of the sample proportion of each sample.</strong></li>
+</ul>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="part-1---sampling-distributions.html#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_props50 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb20-2"><a href="part-1---sampling-distributions.html#cb20-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb20-3"><a href="part-1---sampling-distributions.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb20-4"><a href="part-1---sampling-distributions.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb20-5"><a href="part-1---sampling-distributions.html#cb20-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
+<span id="cb20-6"><a href="part-1---sampling-distributions.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-7"><a href="part-1---sampling-distributions.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props50, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb20-8"><a href="part-1---sampling-distributions.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb20-9"><a href="part-1---sampling-distributions.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
+<span id="cb20-10"><a href="part-1---sampling-distributions.html#cb20-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
+<span id="cb20-11"><a href="part-1---sampling-distributions.html#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Sample size = 50, Number of samples = 15000&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/iterate-1.png" width="672" /></p>
 <p>If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the <code>binwidth</code> argument in <code>geom_histogram</code>.</p>
 <p><br></p>
-<p><strong>How many elements are there in <code>sample_props50</code>?</strong></p>
-<div id="radio_ZSPNIQKWQN" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ZSPNIQKWQN" value=""></input> <span>50</span></label><label><input type="radio" autocomplete="off" name="radio_ZSPNIQKWQN" value=""></input> <span>100</span></label><label><input type="radio" autocomplete="off" name="radio_ZSPNIQKWQN" value=""></input> <span>1500</span></label><label><input type="radio" autocomplete="off" name="radio_ZSPNIQKWQN" value=""></input> <span>1000</span></label><label><input type="radio" autocomplete="off" name="radio_ZSPNIQKWQN" value="answer"></input> <span>15000</span></label>
+<p><strong>How many observations are there in <code>sample_props50</code>?</strong></p>
+<div id="radio_VZBPEXMBUH" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_VZBPEXMBUH" value=""></input> <span>50</span></label><label><input type="radio" autocomplete="off" name="radio_VZBPEXMBUH" value=""></input> <span>100</span></label><label><input type="radio" autocomplete="off" name="radio_VZBPEXMBUH" value=""></input> <span>1500</span></label><label><input type="radio" autocomplete="off" name="radio_VZBPEXMBUH" value=""></input> <span>1000</span></label><label><input type="radio" autocomplete="off" name="radio_VZBPEXMBUH" value="answer"></input> <span>15000</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -437,8 +459,8 @@ Hint
 </div>
 <p><br></p>
 <p><strong>What distribution does the shape of the histogram most resemble?</strong></p>
-<div id="radio_VVOPTQWJEG" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VVOPTQWJEG" value=""></input> <span>Binomial</span></label><label><input type="radio" autocomplete="off" name="radio_VVOPTQWJEG" value=""></input> <span>Geometric</span></label><label><input type="radio" autocomplete="off" name="radio_VVOPTQWJEG" value="answer"></input> <span>Normal</span></label><label><input type="radio" autocomplete="off" name="radio_VVOPTQWJEG" value=""></input> <span>Poisson</span></label>
+<div id="radio_DYCFYFXRZM" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DYCFYFXRZM" value=""></input> <span>Poisson</span></label><label><input type="radio" autocomplete="off" name="radio_DYCFYFXRZM" value="answer"></input> <span>Normal</span></label><label><input type="radio" autocomplete="off" name="radio_DYCFYFXRZM" value=""></input> <span>Geometric</span></label><label><input type="radio" autocomplete="off" name="radio_DYCFYFXRZM" value=""></input> <span>Binomial</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -450,22 +472,24 @@ Hint
 </div>
 <div id="exercise-4" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 4<a href="part-1---sampling-distributions.html#exercise-4" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Try changing the number of iterations carried out to see the effect this might have on the distribution. Start with 500 iterations and then increase.</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="part-1---sampling-distributions.html#cb20-1" aria-hidden="true" tabindex="-1"></a>sample_props50 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb20-2"><a href="part-1---sampling-distributions.html#cb20-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">500</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb20-3"><a href="part-1---sampling-distributions.html#cb20-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb20-4"><a href="part-1---sampling-distributions.html#cb20-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb20-5"><a href="part-1---sampling-distributions.html#cb20-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
-<span id="cb20-6"><a href="part-1---sampling-distributions.html#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="part-1---sampling-distributions.html#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props50, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
-<span id="cb20-8"><a href="part-1---sampling-distributions.html#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb20-9"><a href="part-1---sampling-distributions.html#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
-<span id="cb20-10"><a href="part-1---sampling-distributions.html#cb20-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
-<span id="cb20-11"><a href="part-1---sampling-distributions.html#cb20-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Sample size = 50&quot;</span>)</span></code></pre></div>
+<ul>
+<li><strong>Try changing the number of iterations carried out to see the effect this might have on the distribution. Start with 500 iterations and then increase.</strong></li>
+</ul>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="part-1---sampling-distributions.html#cb21-1" aria-hidden="true" tabindex="-1"></a>sample_props50 <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb21-2"><a href="part-1---sampling-distributions.html#cb21-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">500</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb21-3"><a href="part-1---sampling-distributions.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb21-4"><a href="part-1---sampling-distributions.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb21-5"><a href="part-1---sampling-distributions.html#cb21-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
+<span id="cb21-6"><a href="part-1---sampling-distributions.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-7"><a href="part-1---sampling-distributions.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props50, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb21-8"><a href="part-1---sampling-distributions.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.05</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb21-9"><a href="part-1---sampling-distributions.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
+<span id="cb21-10"><a href="part-1---sampling-distributions.html#cb21-10" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
+<span id="cb21-11"><a href="part-1---sampling-distributions.html#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Sample size = 50&quot;</span>)</span></code></pre></div>
 <p><br></p>
 <p><strong>Would you expect the distribution to change if 50,000 samples were collected?</strong></p>
-<div id="radio_DVHNXJEAAK" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_DVHNXJEAAK" value=""></input> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_DVHNXJEAAK" value="answer"></input> <span>No</span></label>
+<div id="radio_DEHJXSAGRE" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_DEHJXSAGRE" value=""></input> <span>Yes</span></label><label><input type="radio" autocomplete="off" name="radio_DEHJXSAGRE" value="answer"></input> <span>No</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -478,10 +502,9 @@ Hint
 </div>
 <div id="sample-size-and-sampling-distribution" class="section level2 unnumbered hasAnchor">
 <h2>Sample Size and Sampling Distribution<a href="part-1---sampling-distributions.html#sample-size-and-sampling-distribution" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Computing a sampling distribution, specifically, the sampling distribution of the proportions from samples of 50 people results in the following histogram.</p>
+<p>Let's return to the sampling distribution of the proportions from samples of 50 people based on 15000 samples as shown in the following histogram.</p>
 <p><img src="main_files/figure-html/hist-1.png" width="672" /></p>
-<p>The sampling distribution that you computed tells you much about estimating the true proportion of people who think that the work scientists do doesn't benefit them.</p>
-<p>Because the sample proportion is an unbiased estimator, the sampling distribution is centered at the true population proportion, and the spread of the distribution indicates how much variability is incurred by sampling only 50 people at a time from the population.</p>
+<p>The sampling distribution that you computed tells you a lot about estimating the true proportion (<span class="math inline">\(p\)</span>) of people who think that the work scientists do doesn't benefit them using a sample proportion (<span class="math inline">\(\hat{p}\)</span>) from a random sample. For example, notice that the sampling distribution is <strong>centered</strong> at the true population proportion (<span class="math inline">\(p=0.2\)</span>) which shows that these sample proportions <span class="math inline">\(\hat{p}\)</span> are unbiased estimates of <span class="math inline">\(p\)</span>. The sampling distribution also tells us about the <strong>spread</strong> of these sample proportions (i.e. their variance or standard error) which indicates how much variability in the sample proportion is expected when randomly sampling only 50 people at a time from the population. Lastly the <strong>shape</strong> of the sampling distribution shows us that these sample proportions appear to follow a normal distribution</p>
 <p><br></p>
 </div>
 <div id="effect-of-sample-size-on-sampling-distribution" class="section level2 unnumbered hasAnchor">
@@ -490,19 +513,19 @@ Hint
 <p><br></p>
 <div id="exercise-5" class="section level3 unnumbered hasAnchor">
 <h3>Exercise 5<a href="part-1---sampling-distributions.html#exercise-5" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>Try changing the sample size to see the effect this might have on the distribution. Start with a sample size of 50 and then increase it to see the effect (e.g. double it, then double it again).</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="part-1---sampling-distributions.html#cb21-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb21-2"><a href="part-1---sampling-distributions.html#cb21-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="part-1---sampling-distributions.html#cb21-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb21-4"><a href="part-1---sampling-distributions.html#cb21-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb21-5"><a href="part-1---sampling-distributions.html#cb21-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
-<span id="cb21-6"><a href="part-1---sampling-distributions.html#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="part-1---sampling-distributions.html#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
-<span id="cb21-8"><a href="part-1---sampling-distributions.html#cb21-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb21-9"><a href="part-1---sampling-distributions.html#cb21-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb21-10"><a href="part-1---sampling-distributions.html#cb21-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
-<span id="cb21-11"><a href="part-1---sampling-distributions.html#cb21-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
-<span id="cb21-12"><a href="part-1---sampling-distributions.html#cb21-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes&quot;</span>)</span></code></pre></div>
+<p><strong>Try changing the sample size to see the effect this might have on the distribution. Start with a sample size of 50 and then increase it to see the effect (e.g. double it, then double it again).</strong></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="part-1---sampling-distributions.html#cb22-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb22-2"><a href="part-1---sampling-distributions.html#cb22-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="part-1---sampling-distributions.html#cb22-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="part-1---sampling-distributions.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-5"><a href="part-1---sampling-distributions.html#cb22-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
+<span id="cb22-6"><a href="part-1---sampling-distributions.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-7"><a href="part-1---sampling-distributions.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb22-8"><a href="part-1---sampling-distributions.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb22-9"><a href="part-1---sampling-distributions.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb22-10"><a href="part-1---sampling-distributions.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
+<span id="cb22-11"><a href="part-1---sampling-distributions.html#cb22-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
+<span id="cb22-12"><a href="part-1---sampling-distributions.html#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes&quot;</span>)</span></code></pre></div>
 <div class="webex-solution">
 <button>
 Hint
@@ -513,21 +536,8 @@ Hint
 <button>
 Solution
 </button>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="part-1---sampling-distributions.html#cb22-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb22-2"><a href="part-1---sampling-distributions.html#cb22-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb22-3"><a href="part-1---sampling-distributions.html#cb22-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
-<span id="cb22-4"><a href="part-1---sampling-distributions.html#cb22-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
-<span id="cb22-5"><a href="part-1---sampling-distributions.html#cb22-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
-<span id="cb22-6"><a href="part-1---sampling-distributions.html#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="part-1---sampling-distributions.html#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
-<span id="cb22-8"><a href="part-1---sampling-distributions.html#cb22-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
-<span id="cb22-9"><a href="part-1---sampling-distributions.html#cb22-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
-<span id="cb22-10"><a href="part-1---sampling-distributions.html#cb22-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
-<span id="cb22-11"><a href="part-1---sampling-distributions.html#cb22-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
-<span id="cb22-12"><a href="part-1---sampling-distributions.html#cb22-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes (n=100 here)&quot;</span>)</span></code></pre></div>
-<p><img src="main_files/figure-html/ex5_solution-1.png" width="672" /></p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="part-1---sampling-distributions.html#cb23-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
-<span id="cb23-2"><a href="part-1---sampling-distributions.html#cb23-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">200</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb23-2"><a href="part-1---sampling-distributions.html#cb23-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">50</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb23-3"><a href="part-1---sampling-distributions.html#cb23-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
 <span id="cb23-4"><a href="part-1---sampling-distributions.html#cb23-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
 <span id="cb23-5"><a href="part-1---sampling-distributions.html#cb23-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
@@ -537,13 +547,39 @@ Solution
 <span id="cb23-9"><a href="part-1---sampling-distributions.html#cb23-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
 <span id="cb23-10"><a href="part-1---sampling-distributions.html#cb23-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
 <span id="cb23-11"><a href="part-1---sampling-distributions.html#cb23-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
-<span id="cb23-12"><a href="part-1---sampling-distributions.html#cb23-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes (n=200 here)&quot;</span>)</span></code></pre></div>
+<span id="cb23-12"><a href="part-1---sampling-distributions.html#cb23-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes (n=50 here)&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/ex5_solution-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="part-1---sampling-distributions.html#cb24-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb24-2"><a href="part-1---sampling-distributions.html#cb24-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">100</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="part-1---sampling-distributions.html#cb24-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="part-1---sampling-distributions.html#cb24-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="part-1---sampling-distributions.html#cb24-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
+<span id="cb24-6"><a href="part-1---sampling-distributions.html#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="part-1---sampling-distributions.html#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb24-8"><a href="part-1---sampling-distributions.html#cb24-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb24-9"><a href="part-1---sampling-distributions.html#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb24-10"><a href="part-1---sampling-distributions.html#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
+<span id="cb24-11"><a href="part-1---sampling-distributions.html#cb24-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
+<span id="cb24-12"><a href="part-1---sampling-distributions.html#cb24-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes (n=100 here)&quot;</span>)</span></code></pre></div>
 <p><img src="main_files/figure-html/ex5_solution-2.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="part-1---sampling-distributions.html#cb25-1" aria-hidden="true" tabindex="-1"></a>sample_props <span class="ot">&lt;-</span> global_monitor <span class="sc">%&gt;%</span></span>
+<span id="cb25-2"><a href="part-1---sampling-distributions.html#cb25-2" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">rep_sample_n</span>(<span class="at">size =</span> <span class="dv">200</span>, <span class="at">reps =</span> <span class="dv">15000</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb25-3"><a href="part-1---sampling-distributions.html#cb25-3" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">count</span>(scientist_work) <span class="sc">%&gt;%</span></span>
+<span id="cb25-4"><a href="part-1---sampling-distributions.html#cb25-4" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">mutate</span>(<span class="at">p_hat =</span> n <span class="sc">/</span><span class="fu">sum</span>(n)) <span class="sc">%&gt;%</span></span>
+<span id="cb25-5"><a href="part-1---sampling-distributions.html#cb25-5" aria-hidden="true" tabindex="-1"></a>                    <span class="fu">filter</span>(scientist_work <span class="sc">==</span> <span class="st">&quot;Doesn&#39;t benefit&quot;</span>)</span>
+<span id="cb25-6"><a href="part-1---sampling-distributions.html#cb25-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-7"><a href="part-1---sampling-distributions.html#cb25-7" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sample_props, <span class="fu">aes</span>(<span class="at">x =</span> p_hat)) <span class="sc">+</span></span>
+<span id="cb25-8"><a href="part-1---sampling-distributions.html#cb25-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">binwidth =</span> <span class="fl">0.02</span>, <span class="at">fill =</span> <span class="st">&quot;seagreen3&quot;</span>) <span class="sc">+</span></span>
+<span id="cb25-9"><a href="part-1---sampling-distributions.html#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">xlim</span>(<span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb25-10"><a href="part-1---sampling-distributions.html#cb25-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;p_hat (Doesn&#39;t benefit)&quot;</span>,</span>
+<span id="cb25-11"><a href="part-1---sampling-distributions.html#cb25-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;Sampling distribution of p_hat&quot;</span>,</span>
+<span id="cb25-12"><a href="part-1---sampling-distributions.html#cb25-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;Trying different sample sizes (n=200 here)&quot;</span>)</span></code></pre></div>
+<p><img src="main_files/figure-html/ex5_solution-3.png" width="672" /></p>
 </div>
 <p><br></p>
 <p><strong>When the sample size is larger, what happens to the center?</strong></p>
-<div id="radio_VGSDHDDBFY" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VGSDHDDBFY" value=""></input> <span>Increases</span></label><label><input type="radio" autocomplete="off" name="radio_VGSDHDDBFY" value=""></input> <span>Decreases</span></label><label><input type="radio" autocomplete="off" name="radio_VGSDHDDBFY" value="answer"></input> <span>Stays constant</span></label>
+<div id="radio_TAKCQQPNVY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_TAKCQQPNVY" value=""></input> <span>Increases</span></label><label><input type="radio" autocomplete="off" name="radio_TAKCQQPNVY" value=""></input> <span>Decreases</span></label><label><input type="radio" autocomplete="off" name="radio_TAKCQQPNVY" value="answer"></input> <span>Stays constant</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -553,8 +589,8 @@ Hint
 </div>
 <p><br></p>
 <p><strong>When the sample size is larger, what happens to the spread?</strong></p>
-<div id="radio_FTBQWYQISD" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FTBQWYQISD" value=""></input> <span>Increases</span></label><label><input type="radio" autocomplete="off" name="radio_FTBQWYQISD" value="answer"></input> <span>Decreases</span></label><label><input type="radio" autocomplete="off" name="radio_FTBQWYQISD" value=""></input> <span>Stays constant</span></label>
+<div id="radio_EBGEFSUIZP" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_EBGEFSUIZP" value=""></input> <span>Increases</span></label><label><input type="radio" autocomplete="off" name="radio_EBGEFSUIZP" value="answer"></input> <span>Decreases</span></label><label><input type="radio" autocomplete="off" name="radio_EBGEFSUIZP" value=""></input> <span>Stays constant</span></label>
 </div>
 <div class="webex-solution">
 <button>

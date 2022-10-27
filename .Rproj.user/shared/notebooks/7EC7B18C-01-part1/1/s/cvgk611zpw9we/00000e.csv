@@ -1,0 +1,3 @@
+"0","global_monitor %>%"
+"0","  count(scientist_work) %>%  # This creates a new variable called ""n"" containing the counts of the different values in ""scientist_work"""
+"0","  mutate(p = n /sum(n))"

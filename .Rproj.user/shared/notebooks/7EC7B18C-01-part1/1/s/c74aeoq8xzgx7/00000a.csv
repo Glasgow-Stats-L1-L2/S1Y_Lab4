@@ -1,0 +1,5 @@
+"0",""
+"0","ggplot(sample1, aes(x = scientist_work)) + "
+"0","  geom_bar(fill = ""lightblue"", width = 0.5) + "
+"0","  labs(x = """", y = """", title = ""Do you believe that the work scientists do benefit people like you?"" ) +"
+"0","  coord_flip()"

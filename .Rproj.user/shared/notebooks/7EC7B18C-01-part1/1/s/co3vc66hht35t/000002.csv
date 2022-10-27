@@ -1,0 +1,6 @@
+"0","sample3 <- global_monitor %>% "
+"0","  sample_n(100)"
+"0",""
+"0","sample3 %>% "
+"0","  count(scientist_work) %>% "
+"0","  mutate(p_hat = n /sum(n))"

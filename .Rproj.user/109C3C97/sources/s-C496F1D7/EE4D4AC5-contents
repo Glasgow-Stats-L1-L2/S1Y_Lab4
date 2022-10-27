@@ -56,12 +56,12 @@ Think about what the `rep` function does to both components and then when they c
 
 <br>
 
-- **Run the following code to calculate the proportion of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.**
+- **Run the following code to calculate and view the counts and proportions of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.**
 
-```{r summary, echo=TRUE, eval=FALSE}
+```{r summary, echo=TRUE, eval=TRUE}
 global_monitor %>%
-  count(scientist_work) %>%
-  mutate(p = n /sum(n))
+  count(scientist_work) %>%  # This creates a new variable called "n" containing the counts of the different values in "scientist_work"
+  mutate(p = n /sum(n)) # This creates a new variable called "p" containing the proportions of the different values in "scientist_work"
 ```
 
 - **Run the following code to produce this bar plot to visually summarise the distribution of the responses.**
@@ -80,10 +80,12 @@ The function `coord_flip` flips the coordinates of the plot to create a horizont
 
 ## Unknown Sampling Distribution {-}
 
-In this data set, we have access to the entire population of 100000 people, but this is almost never the case in real life. Gathering information on an entire population is often extremely costly or impossible. 
+In this data set, we have access to the entire population of 100000 people, but this is (almost) never the case in real life. Gathering information on an entire population is often extremely costly or impossible. 
 Because of this, we often take a sample of the population and use that to understand the properties of the population.
 
-If you are interested in estimating the proportion of people who don't think the work scientists do benefits them, you can use the `sample_n` command to survey the population. This following code collects a simple random sample of size 50 from the `global_monitor` data set, and assigns the result to `sample1`. 
+If you are interested in estimating the proportion of people who don't think the work scientists do benefits them, you can use the `sample_n` command to "survey" the population. 
+
+- **Run this code to take a simple random sample of size 50 from the `global_monitor` data set and assign the result to a new object called `sample1`.**
 
 ```{r sample1, eval = TRUE}
 sample1 <- global_monitor %>%
@@ -91,16 +93,16 @@ sample1 <- global_monitor %>%
 ```
 
 This is similar to randomly drawing names from a hat that contains the names of everyone in the population.
-Working with these 50 names is considerably simpler than working with all 100,000 people in the population.
+Surveying 50 people is considerably simpler than surveying all 100,000 people in the population.
 
 <br>
 
 ### Exercise 1 {-}
 
-Write code to produce the summary statistics and a bar plot for the results of the sample.
+- **Write and run code to produce the summary statistics (i.e. proportions) and a bar plot of the observations in the sample of 50.**
 
 `r hide("Hint")`
-Although the `sample_n` function takes a random sample of observations (i.e. rows) from the data set, you can still refer to the variables in the dataset with the same names. Code presented earlier for visualising and summarising the population data will still be useful for the sample, however be careful to not label your proportion `p` since you're now calculating a sample statistic so use the label `p_hat` instead. 
+Although the `sample_n` function takes a random sample of observations (i.e. rows) from the data set, you can still refer to the variables in the dataset with the same names. Code presented earlier for visualising and summarising the population data will still be useful for the sample, however be careful to not label your proportion `p` since you're now calculating a sample statistic so use a label like `p_hat` instead. 
 `r unhide()`
 
 ```{r ex1_solution, webex.hide="Solution"}
@@ -132,7 +134,9 @@ Think about the sample and the distribution it comes from, relate to materials w
 
 <br>
 
-If we're interested in estimating the proportion of all people who do not believe that the work scientists do benefits them, but we do not have access to the population data, our best single guess is the sample mean. We can calculate and display using the following code.
+If we're interested in estimating the proportion of all people who do not believe that the work scientists do benefits them, but we do not have access to the population data, our best single guess is the sample proportion. 
+
+- **Run this code to calculate and display the sample proportion.
 
 ```{r phat-sample1}
 sample1 %>%
@@ -140,7 +144,7 @@ sample1 %>%
   mutate(p_hat = n /sum(n))
 ```
 
-Depending on the 50 people selected, your estimate could be a bit above or a bit below the population proportion of 0.2. In general, though, the sample proportion turns out to be a pretty good estimate of the true population proportion, and you were able to get it by sampling less than 1% of the population, 50 out of 100000.
+Depending on the 50 people sampled, your estimate could be a bit above or a bit below the population proportion of 0.2 (or in some cases exactly equal to 0.2). In general, though, the sample proportion turns out to be a pretty good estimate of the true population proportion, and you were able to get it by sampling less than 1% of the population, 50 out of 100000.
 
 ```{r MCQ3, echo=FALSE}
 opts_Q3 <- sample(c("Exactly the same",
@@ -155,14 +159,14 @@ opts_Q3 <- sample(c("Exactly the same",
 `r longmcq(opts_Q3)`
 
 `r hide("Hint")`
-As the sample is taken randomly from the population you would expect it to be slightly similar to other draws.
+As each sample is taken randomly from the population you would expect them to be similar but not necessarily identical to each other.
 `r unhide()`
 
 <br>
 
 ### Exercise 2 {-}
 
-Take a second sample, also of size 50, and call it `sample2`. Compare the proportion of people who do not believe that the work scientists do benefits them in `sample1` and `sample2`.
+- **Take a second sample, also of size 50, and call it `sample2`. Compare the proportion of people who do not believe that the work scientists do benefits them in `sample1` and `sample2`.**
 
 `r hide("Hint")`
 Create the sample from `global_monitor` using the function `sample_n()`. Calculate `p_hat` by using the functions `count()` and `mutate()`.
@@ -179,7 +183,7 @@ sample2 %>%
 
 <br>
 
-Create 2 more samples, of size 100 and 1000 calling them `sample3` and `sample4`, and compare the proportion of people who do not believe that the work scientists do benefits them across all four samples.
+- **Create 2 more samples, of size 100 and 1000 calling them `sample3` and `sample4`, and compare the proportion of people who do not believe that the work scientists do benefits them across all four samples.**
 
 `r hide("Hint")`
 `sample3` and `sample4`, and their respective estimates of the population proportion `p_hat`, are created exactly the same way as `sample1` and `sample2`, all that needs changed is the size of the sample within `sample_n()`.
@@ -209,7 +213,7 @@ opts_Q4 <- c("Sample size 50",
 
 <br>
 
-**Looking at the new samples, of size 100 and 1000. Which would you think would provide a more precise estimate of the population mean?**
+- **Looking at the new samples, of size 100 and 1000. Which would you think would provide a more precise estimate of the population mean?**
 
 `r longmcq(opts_Q4)`
 
@@ -223,7 +227,7 @@ Not surprisingly, every time we take another random sample, you might get a diff
 
 Remember that in this lab we unusually had access to the population and therefore we can get an idea of the sampling distribution for the sample proportion by repeating the above steps many times.
 
-Here, we use the function `rep_sample_n` to take 15,000 different samples of size 50 from the population, calculate the proportion of *Science doesn't benefit* responses in each sample and store each result in a vector called `sample_props50`. The distribution of the proportions can then be visualised with a histogram.
+We can use the function `rep_sample_n` to take, say, 15,000 different samples of size 50 from the population, calculate the proportion of *Science doesn't benefit* responses in each sample and store each result in a vector called `sample_props50`. The distribution of the proportions can then be visualised with a histogram.
 
 **Note** We specify that `replace = TRUE` since sampling distributions are constructed by sampling with replacement.
 
@@ -231,9 +235,9 @@ Here, we use the function `rep_sample_n` to take 15,000 different samples of siz
 
 ### Exercise 3 {-}
 
-Run the following code to iterate 15000 samples of size 50 from the population.
+- **Run the following code to iterate 15000 samples of size 50 from the population and display a histogram of the sample proportion of each sample.**
 
-```{r iterate, eval=FALSE}
+```{r iterate, eval=TRUE}
 sample_props50 <- global_monitor %>%
                     rep_sample_n(size = 50, reps = 15000, replace = TRUE) %>%
                     count(scientist_work) %>%
@@ -244,7 +248,7 @@ ggplot(data = sample_props50, aes(x = p_hat)) +
   geom_histogram(binwidth = 0.05, fill = "seagreen3") +
   labs(x = "p_hat (Doesn't benefit)",
        title = "Sampling distribution of p_hat",
-       subtitle = "Sample size = 50, Number of samples = 150")
+       subtitle = "Sample size = 50, Number of samples = 15000")
 ```
 
 If you would like to adjust the bin width of your histogram to show a little more detail, you can do so by changing the `binwidth` argument in `geom_histogram`.
@@ -259,7 +263,7 @@ opts_Q5 <- c("50",
 
 <br>
 
-**How many elements are there in `sample_props50`?**
+**How many observations are there in `sample_props50`?**
 
 `r longmcq(opts_Q5)`
 
@@ -288,7 +292,7 @@ Think about the shape of the histogram and the distributions you are familiar wi
 
 ### Exercise 4 {-}
 
-Try changing the number of iterations carried out to see the effect this might have on the distribution. Start with 500 iterations and then increase.
+- **Try changing the number of iterations carried out to see the effect this might have on the distribution. Start with 500 iterations and then increase.**
 
 ```{r iterate2, eval=FALSE}
 sample_props50 <- global_monitor %>%
@@ -323,7 +327,7 @@ Think about what more data would add to the overall shape. Try it out by changin
 
 ## Sample Size and Sampling Distribution {-}
 
-Computing a sampling distribution, specifically, the sampling distribution of the proportions from samples of 50 people results in the following histogram.
+Let's return to the sampling distribution of the proportions from samples of 50 people based on 15000 samples as shown in the following histogram.
 
 ```{r hist, eval = TRUE, echo=FALSE}
 sample_props50 <- global_monitor %>%
@@ -336,9 +340,7 @@ ggplot(data = sample_props50, aes(x = p_hat)) +
   geom_histogram(binwidth = 0.05, fill = "seagreen3")
 ```
 
-The sampling distribution that you computed tells you much about estimating the true proportion of people who think that the work scientists do doesn't benefit them.
-
-Because the sample proportion is an unbiased estimator, the sampling distribution is centered at the true population proportion, and the spread of the distribution indicates how much variability is incurred by sampling only 50 people at a time from the population.
+The sampling distribution that you computed tells you a lot about estimating the true proportion ($p$) of people who think that the work scientists do doesn't benefit them using a sample proportion ($\hat{p}$) from a random sample.  For example, notice that the sampling distribution is **centered** at the true population proportion ($p=0.2$) which shows that these sample proportions $\hat{p}$ are unbiased estimates of $p$. The sampling distribution also tells us about the **spread** of these sample proportions (i.e. their variance or standard error) which indicates how much variability in the sample proportion is expected when randomly sampling only 50 people at a time from the population.  Lastly the **shape** of the sampling distribution shows us that these sample proportions appear to follow a normal distribution
 
 <br>
 
@@ -350,7 +352,7 @@ Now we will work on getting a sense of the effect that sample size has on the sa
 
 ### Exercise 5 {-}
 
-Try changing the sample size to see the effect this might have on the distribution. Start with a sample size of 50 and then increase it to see the effect (e.g. double it, then double it again).
+**Try changing the sample size to see the effect this might have on the distribution. Start with a sample size of 50 and then increase it to see the effect (e.g. double it, then double it again).**
 
 ```{r iterate3, eval=FALSE}
 sample_props <- global_monitor %>%
@@ -372,6 +374,19 @@ Run the code as it is to see the results for n = 50 then change this value of 50
 `r unhide()`
 
 ```{r ex5_solution, webex.hide="Solution", warning=FALSE}
+sample_props <- global_monitor %>%
+                    rep_sample_n(size = 50, reps = 15000, replace = TRUE) %>%
+                    count(scientist_work) %>%
+                    mutate(p_hat = n /sum(n)) %>%
+                    filter(scientist_work == "Doesn't benefit")
+
+ggplot(data = sample_props, aes(x = p_hat)) +
+  geom_histogram(binwidth = 0.02, fill = "seagreen3") +
+  xlim(0, 1) +
+  labs(x = "p_hat (Doesn't benefit)",
+       title = "Sampling distribution of p_hat",
+       subtitle = "Trying different sample sizes (n=50 here)")
+
 sample_props <- global_monitor %>%
                     rep_sample_n(size = 100, reps = 15000, replace = TRUE) %>%
                     count(scientist_work) %>%
