@@ -17,7 +17,7 @@ The <a href="https://wellcome.org/reports/wellcome-global-monitor/2018">Wellcome
 In this lab, we will assume this 20% is a true population proportion and learn about how sample proportions can vary from sample to sample by taking samples from the population. 
 We will first create our population assuming a population size of 100,000 (Which isn't very realistic, but it will serve the purposes of this lab).  This means 20,000 (20%) of the population think the work scientists do does not benefit them personally and the remaining 80,000 think it does. 
 
-The following piece of code creates the data frame for the responses of the population to the Global Monitor survey.
+- **Run the following code to create the data frame for the responses of the population to the Global Monitor survey.**
 
 ```{r dataframe}
 global_monitor <- tibble(
@@ -27,6 +27,13 @@ global_monitor <- tibble(
 `tibble` is a function in `tidyverse` that creates a dataset, or "data frame" in R terminology.  Within this data frame, the function `rep(x, times)` replicates the values in `x` `times` times. Here, we replicate `"Benefits"` 80000 times and `"Doesn't benefit"` 20000 times and coerced all in one vector, as 80% of the population think scientists work benefits them. 
 
 The name of the data frame is `global_monitor` and the name of the variable that contains responses to the question *"Do you believe that the work scientists do benefit people like you?"* is `scientist_work`.
+
+
+- **Run the following code to see these first 6 values in the data frame `global_monitor`**
+
+```{r head}
+head(global_monitor)
+```
 
 
 ```{r MCQ1, echo=FALSE}
@@ -49,7 +56,7 @@ Think about what the `rep` function does to both components and then when they c
 
 <br>
 
-Run the following R code to calculate the proportion of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.
+- **Run the following code to calculate the proportion of people who think that the work scientists do/don't benefit people like them to confirm we constructed the data frame correctly.**
 
 ```{r summary, echo=TRUE, eval=FALSE}
 global_monitor %>%
@@ -57,9 +64,9 @@ global_monitor %>%
   mutate(p = n /sum(n))
 ```
 
-Run the following R code to produce a bar plot to visually demonstrate the distribution of the responses.
+- **Run the following code to produce a bar plot to visually summarise the distribution of the responses.**
 
-```{r barplot, eval=FALSE}
+```{r barplot}
 ggplot(global_monitor, aes(x = scientist_work)) +
   geom_bar(fill = "lightblue", width = 0.5) + 
   labs(x = "", y = "",

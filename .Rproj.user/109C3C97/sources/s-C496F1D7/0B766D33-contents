@@ -1,0 +1,67 @@
+---
+title: "S1Y Lab 3"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+biblio-style: apalike
+link-citations: yes
+---
+
+```{r setup, include = FALSE}
+library(webexercises)
+library(tinytex)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(tidyverse)
+library(openintro)
+library(infer)
+library(gridExtra)
+library(HistData)
+library(GGally)
+library(broom)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r eval=FALSE, echo=FALSE}
+install.packages("bookdown")
+```
+
+```{r include=FALSE, echo=FALSE}
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```
+
+# Welcome to S1Y Lab 3
+
+```{r fig1, echo=FALSE,out.width="50%"}
+knitr::include_graphics("images/forensic.jpg")
+```
+ 
+This is the Forensic Case Study Lab.
+As you work through the different sections, you will be asked some multiple-choice questions, run example code and also write your own code. After you finish the sections *Value of Evidence Example* and *PCR testing (COVID-19)*, you are asked to complete a Group Exercise. 
+
+ 
+In this tutorial, you will:
+
+* compute posterior probabilities of the form $P(H_{p}|E)$ from prior probabilities $P(H_{p})$, using odds and the value of evidence.
+* write a function that computes a conditional probability using Bayes' theorem.  
+* investigate the effects of sensitivity, specificity and base rate on test results.
+
+
+Before you start your work in RStudio, make sure you have the following packages loaded: 
+
+
+```{r load-packages, eval = FALSE}
+#load them at the start of each session
+library(dplyr)
+library(ggplot2)
+```
+
+<!-- #you only need to install them once -->
+<!-- install.packages("dplyr") -->
+<!-- install.packages("ggplot2") -->
+
+ 
+<br> 

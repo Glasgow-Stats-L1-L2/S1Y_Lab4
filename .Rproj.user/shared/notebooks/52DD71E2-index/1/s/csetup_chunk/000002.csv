@@ -1,0 +1,9 @@
+"0","library(webexercises)"
+"0","library(tinytex)"
+"0","library(dplyr)"
+"0","library(knitr)"
+"0","library(ggplot2)"
+"0","library(infer)"
+"2","Warning:"
+"2"," package ‘infer’ was built under R version 4.1.3
+"

@@ -1,0 +1,5 @@
+"0","ggplot(global_monitor, aes(x = scientist_work)) +"
+"0","  geom_bar(fill = ""lightblue"", width = 0.5) + "
+"0","  labs(x = """", y = """","
+"0","       title = ""Population counts of beliefs in the work scientists do"") +"
+"0","  coord_flip() "

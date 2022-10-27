@@ -1,0 +1,2 @@
+"0","global_monitor <- tibble("
+"0","  scientist_work = c(rep(""Benefits"", 80000), rep(""Doesn't benefit"", 20000)))"
