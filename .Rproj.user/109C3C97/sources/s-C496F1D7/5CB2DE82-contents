@@ -1,0 +1,113 @@
+---
+title: "Lab 4 Group Tasks Solutions"
+
+output: pdf_document
+fig_caption: yes
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval=FALSE, comment = NA, warning=FALSE, message=FALSE, fig.align="center", fig.pos="H")
+
+library(tinytex)
+library(dplyr)
+library(knitr)
+library(ggplot2)
+library(infer)
+
+global_monitor <- tibble(
+  scientist_work = c(rep("Benefits", 80000), rep("Doesn't benefit", 20000)))
+
+us_adults <- tibble(
+  climate_change_affects = c(rep("Yes", 62000), rep("No", 38000)))
+```
+
+## Group Tasks
+
+### Sampling Distributions
+
+#### Task 1
+
+Take a sample of size 20 from the population you created in Part 1 and calculate the proportion of people in this sample who think the work scientists do  **does** enhance their lives. Using this sample, state the point estimate of the population proportion of people who think the work scientists do enhance their lives?
+
+```{r group1, eval = FALSE}
+sample <- global_monitor %>%
+  sample_n(20)
+
+sample %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n /sum(n))
+```
+
+#### Task 2
+
+Take 2000 samples of size 20 from the population and compute 2000 sample proportions for those who think the work scientists do enhance their lives. Store these proportions as `sample_props20`. Plot the data as a histogram.
+
+```{r group2, eval = TRUE, out.width='72%'}
+sample_props20 <- global_monitor %>%
+  rep_sample_n(size = 20, reps = 2000, replace = TRUE) %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n /sum(n)) %>%
+  filter(scientist_work == "Benefits")
+
+ggplot(data = sample_props20, aes(x = p_hat)) +
+  geom_histogram(binwidth = 0.05, fill = "seagreen3")
+```
+
+**Is there any skew in this sampling distribution?**
+
+a)  Yes, the data are left skewed
+
+#### Task 3
+
+Change your sample size from 20 to 200 and calculate each sample proportion using the same method as above. Store these proportions in a new object called `sample_props200`. Then, plot the sampling distribution as a histogram.
+
+```{r group3, eval = TRUE, out.width='72%'}
+sample_props200 <- global_monitor %>%
+  rep_sample_n(size = 200, reps = 2000, replace = TRUE) %>%
+  count(scientist_work) %>%
+  mutate(p_hat = n /sum(n)) %>%
+  filter(scientist_work == "Benefits")
+
+ggplot(data = sample_props200, aes(x = p_hat)) +
+  geom_histogram(binwidth = 0.02, fill = "seagreen3")
+```
+
+**What value would you use to estimate the true population proportion from the sampling distribution from *Task 3*?**
+
+b)  The mean of the sample proportions
+
+**Of the sampling distributions from 2 and 3, which has a smaller spread?**
+
+b)  Sampling distribution from Q3
+
+### Confidence Intervals
+
+#### Task 4
+
+Returning now to the context and data in Part 2, take a sample of size 60 from `us_adults` and calculate a confidence interval for the proportion of US Adults who think climate change is affecting their local community with a confidence level of 90% and interpret it.
+
+```{r group4, eval=TRUE}
+sample <- us_adults %>%
+  sample_n(60)
+
+sample_pro <- proportions(table(sample))
+sample_pro <- sample_pro[2]
+
+sample_se <- sqrt(sample_pro * (1 - sample_pro) / 60)
+
+lower_vector <- sample_pro - 1.64 * sample_se / sqrt(60) 
+upper_vector <- sample_pro + 1.64 * sample_se / sqrt(60)
+
+ci <- c(lower_vector, upper_vector)
+ci
+```
+
+**Is this interval narrower or wider than the confidence interval for the proportion of US Adults who think climate change is affecting their local community calculated earlier at a 95% confidence level?**
+
+a)  narrower
+
+
+
+
+
+

@@ -20,13 +20,19 @@ Take 2000 samples of size 20 from the population and compute 2000 sample proport
 
 <br>
 
+
+
+```{r MCQGT2, echo=FALSE}
+opts_QGT2 <- c("Yes, the data are left skewed",
+              "Yes, the data are right skewed", answer = "No, there is no skew present")
+```
+
+<br>
+
+
 **Is there any skew in this sampling distribution?**
 
-a)  Yes, the data are left skewed
-
-b)  Yes, the data are right skewed
-
-c)  No, there is no skew present
+`r longmcq(opts_QGT2)`
 
 <br>
 
@@ -36,23 +42,27 @@ Change your sample size from 20 to 200 and calculate each sample proportion usin
 
 <br>
 
+
 **What value would you use to estimate the true population proportion from the sampling distribution from *Task 3*?**
 
-a)  The median of the sample proportions
+```{r MCQGT3, echo=FALSE}
+opts_QGT3 <- c("The median of the sample proportions",
+              answer = "The mean of the sample proportions", "The maximum of the sample proportions", "The minimum of the sample proportions")
+```
 
-b)  The mean of the sample proportions
+`r longmcq(opts_QGT3)`
 
-c)  The maximum of the sample proportions
-
-d)  The minimum of the sample proportions
 
 <br>
 
 **Of the sampling distributions from 2 and 3, which has a smaller spread?**
 
-a)  Sampling distribution from Q2
+```{r MCQGT3b, echo=FALSE}
+opts_QGT3b <- c("Sampling distribution from Q2",
+              answer = "Sampling distribution from Q3")
+```
 
-b)  Sampling distribution from Q3
+`r longmcq(opts_QGT3b)`
 
 <br>
 
@@ -73,9 +83,12 @@ Take a sample of size 60 from `us_adults` and find a confidence interval for the
 
 **Is this interval narrower or wider than the confidence interval for the proportion of US Adults who think climate change is affecting their local community calculated earlier at a 95% confidence level?**
 
-a)  narrower
+```{r MCQGT4, echo=FALSE}
+opts_QGT4 <- c(answer = "narrower",
+              "wider")
+```
 
-b)  wider
+`r longmcq(opts_QGT4)`
 
 <br>
 
