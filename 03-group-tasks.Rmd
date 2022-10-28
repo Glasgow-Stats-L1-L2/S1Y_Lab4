@@ -4,13 +4,13 @@
 
 In Part 1, we have only focused on estimating the proportion of those who think the work scientists do doesn’t benefit them.
 
-Now, you’ll try to estimate the proportion of those who think the work of scientists does benefit them.
+Now, you’ll estimate the proportion of those who think the work of scientists does benefit them.
 
 <br>
 
 ### Task 1 {-}
 
-Take a sample of size 20 from the population and calculate the proportion of people in this sample who think the work scientists do enhances their lives. Using this sample, state the point estimate of the population proportion of people who think the work scientists do enhance their lives?
+Take a sample of size 20 from the population you created in Part 1 and calculate the proportion of people in this sample who think the work scientists do  **does** enhance their lives. Using this sample, state the point estimate of the population proportion of people who think the work scientists do enhance their lives?
 
 <br>
 
@@ -23,8 +23,8 @@ Take 2000 samples of size 20 from the population and compute 2000 sample proport
 
 
 ```{r MCQGT2, echo=FALSE}
-opts_QGT2 <- c("Yes, the data are left skewed",
-              "Yes, the data are right skewed", answer = "No, there is no skew present")
+opts_QGT2 <- c(answer = "Yes, the data are left skewed",
+              "Yes, the data are right skewed", "No, there is no skew present")
 ```
 
 <br>
@@ -77,7 +77,7 @@ opts_QGT3b <- c("Sampling distribution from Q2",
 
 ### Task 4 {-}
 
-Take a sample of size 60 from `us_adults` and find a confidence interval for the proportion of US Adults who think climate change is affecting their local community with a confidence level of 90% and interpret it.
+Returning now to the context and data in Part 2, take a sample of size 60 from `us_adults` and calculate a confidence interval for the proportion of US Adults who think climate change is affecting their local community with a confidence level of 90% and interpret it.
 
 <br>
 
