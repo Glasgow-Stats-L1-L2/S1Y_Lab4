@@ -1,0 +1,7 @@
+{
+    "installOptions": {
+        "installFromRepository": true,
+        "libraryPath": "C:/Users/mtb3f/OneDrive - University of Glasgow/RStudio and ShinyApps/R/win-library/4.0",
+        "installDependencies": true
+    }
+}
