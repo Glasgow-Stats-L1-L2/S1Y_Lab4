@@ -143,8 +143,8 @@ sample_pro <- sample_pro[2]
 
 sample_se <- sqrt(sample_pro * (1 - sample_pro) / 60)
 
-lower_vector <- sample_pro - 1.96 * sample_se / sqrt(60) 
-upper_vector <- sample_pro + 1.96 * sample_se / sqrt(60)
+lower_vector <- sample_pro - 1.96 * sample_se 
+upper_vector <- sample_pro + 1.96 * sample_se
 
 ci <- c(lower_vector, upper_vector)
 
@@ -212,20 +212,20 @@ sample_pro <- sample_pro[2]
 sample_se <- sqrt(sample_pro * (1 - sample_pro) / n)
 
 #90% Confidence Level
-lower_vector <- sample_pro - 1.64* sample_se / sqrt(n) 
-upper_vector <- sample_pro + 1.64 * sample_se / sqrt(n)
+lower_vector <- sample_pro - 1.64* sample_se
+upper_vector <- sample_pro + 1.64 * sample_se
 ci <- c(lower_vector, upper_vector)
 c("90% CI", paste(round(ci,3)))
 
 #95% Confidence Level
-lower_vector <- sample_pro - 1.96 * sample_se / sqrt(n) 
-upper_vector <- sample_pro + 1.96 * sample_se / sqrt(n)
+lower_vector <- sample_pro - 1.96 * sample_se
+upper_vector <- sample_pro + 1.96 * sample_se
 ci <- c(lower_vector, upper_vector)
 c("95% CI", paste(round(ci,3)))
 
 #99% Confidence Level
-lower_vector <- sample_pro - 2.58 * sample_se / sqrt(n) 
-upper_vector <- sample_pro + 2.58 * sample_se / sqrt(n)
+lower_vector <- sample_pro - 2.58 * sample_se
+upper_vector <- sample_pro + 2.58 * sample_se
 ci <- c(lower_vector, upper_vector)
 c("99% CI", paste(round(ci,3)))
 ```

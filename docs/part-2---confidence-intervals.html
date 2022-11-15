@@ -269,13 +269,13 @@ Solution
 <pre><code>## # A tibble: 2 x 3
 ##   climate_change_affects     n p_hat
 ##   &lt;chr&gt;                  &lt;int&gt; &lt;dbl&gt;
-## 1 No                        20 0.333
-## 2 Yes                       40 0.667</code></pre>
+## 1 No                        22 0.367
+## 2 Yes                       38 0.633</code></pre>
 </div>
 <p><br></p>
 <strong>What would you expect another student's proportion to be?</strong>
-<div id="radio_VXMDXDGUMM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VXMDXDGUMM" value="answer"></input> <span>Slightly similar</span></label><label><input type="radio" autocomplete="off" name="radio_VXMDXDGUMM" value=""></input> <span>Identical</span></label><label><input type="radio" autocomplete="off" name="radio_VXMDXDGUMM" value=""></input> <span>Very different</span></label>
+<div id="radio_CMMBOHJGLG" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_CMMBOHJGLG" value="answer"></input> <span>Slightly similar</span></label><label><input type="radio" autocomplete="off" name="radio_CMMBOHJGLG" value=""></input> <span>Identical</span></label><label><input type="radio" autocomplete="off" name="radio_CMMBOHJGLG" value=""></input> <span>Very different</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -302,11 +302,11 @@ Hint
 <p>However, some conditions need to be made for the confidence interval to be valid.</p>
 <p><br></p>
 <strong>What conditions must be met for this confidence to be valid?</strong>
-<div id="radio_FJEJPLWDED" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_FJEJPLWDED" value=""></input> <span>Data comes from a binomial distribution</span></label><label><input type="radio" autocomplete="off" name="radio_FJEJPLWDED" value="answer"></input> <span>Independence assumption is valid</span></label><label><input type="radio" autocomplete="off" name="radio_FJEJPLWDED" value=""></input> <span>Data comes from a normal distribution</span></label>
+<div id="radio_HBRVAXURWC" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_HBRVAXURWC" value=""></input> <span>Data comes from a binomial distribution</span></label><label><input type="radio" autocomplete="off" name="radio_HBRVAXURWC" value=""></input> <span>Data comes from a normal distribution</span></label><label><input type="radio" autocomplete="off" name="radio_HBRVAXURWC" value="answer"></input> <span>Independence assumption is valid</span></label>
 </div>
-<div id="radio_KJGODRBXOM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_KJGODRBXOM" value=""></input> <span>If distribution of the data is skewed the sample size must be small enough</span></label><label><input type="radio" autocomplete="off" name="radio_KJGODRBXOM" value="answer"></input> <span>If the distribution of the data is skewed the sample size must be large enough</span></label>
+<div id="radio_UHOPTWHSHD" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UHOPTWHSHD" value=""></input> <span>If distribution of the data is skewed the sample size must be small enough</span></label><label><input type="radio" autocomplete="off" name="radio_UHOPTWHSHD" value="answer"></input> <span>If the distribution of the data is skewed the sample size must be large enough</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -329,16 +329,16 @@ Hint
 <span id="cb32-6"><a href="part-2---confidence-intervals.html#cb32-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-7"><a href="part-2---confidence-intervals.html#cb32-7" aria-hidden="true" tabindex="-1"></a>sample_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sample_pro <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> sample_pro) <span class="sc">/</span> <span class="dv">60</span>)</span>
 <span id="cb32-8"><a href="part-2---confidence-intervals.html#cb32-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-9"><a href="part-2---confidence-intervals.html#cb32-9" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">60</span>) </span>
-<span id="cb32-10"><a href="part-2---confidence-intervals.html#cb32-10" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(<span class="dv">60</span>)</span>
+<span id="cb32-9"><a href="part-2---confidence-intervals.html#cb32-9" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se </span>
+<span id="cb32-10"><a href="part-2---confidence-intervals.html#cb32-10" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se</span>
 <span id="cb32-11"><a href="part-2---confidence-intervals.html#cb32-11" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-12"><a href="part-2---confidence-intervals.html#cb32-12" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(lower_vector, upper_vector)</span>
 <span id="cb32-13"><a href="part-2---confidence-intervals.html#cb32-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-14"><a href="part-2---confidence-intervals.html#cb32-14" aria-hidden="true" tabindex="-1"></a>ci</span></code></pre></div>
 <p><br></p>
 <strong>If you were to repeat this simulation again and again, would each confidence interval capture the true population proportion of US adults who think climate change affects their local community?</strong>
-<div id="radio_RITEDCFZRC" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_RITEDCFZRC" value="answer"></input> <span>Each would with 95% confidence</span></label><label><input type="radio" autocomplete="off" name="radio_RITEDCFZRC" value=""></input> <span>Yes, each certainly would</span></label><label><input type="radio" autocomplete="off" name="radio_RITEDCFZRC" value=""></input> <span>No, each certainly wouldn't</span></label>
+<div id="radio_XANHEOWVJN" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_XANHEOWVJN" value=""></input> <span>No, each certainly wouldn't</span></label><label><input type="radio" autocomplete="off" name="radio_XANHEOWVJN" value=""></input> <span>Yes, each certainly would</span></label><label><input type="radio" autocomplete="off" name="radio_XANHEOWVJN" value="answer"></input> <span>Each would with 95% confidence</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -350,8 +350,8 @@ Hint
 <p>If we were to collect all the confidence intervals produced in the console above by all the students in S1Y, each student should have produced a slightly different confidence interval because they were each based on different random samples.</p>
 <p><br></p>
 <strong>What proportion of those intervals would you expect to capture the true population mean?</strong>
-<div id="radio_WHDKYFYIVJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_WHDKYFYIVJ" value="answer"></input> <span>95%</span></label><label><input type="radio" autocomplete="off" name="radio_WHDKYFYIVJ" value=""></input> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_WHDKYFYIVJ" value=""></input> <span>2.5%</span></label>
+<div id="radio_PJQVSNQQZY" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_PJQVSNQQZY" value=""></input> <span>5%</span></label><label><input type="radio" autocomplete="off" name="radio_PJQVSNQQZY" value="answer"></input> <span>95%</span></label><label><input type="radio" autocomplete="off" name="radio_PJQVSNQQZY" value=""></input> <span>2.5%</span></label>
 </div>
 <div class="webex-solution">
 <button>
@@ -381,26 +381,26 @@ Hint
 <span id="cb33-8"><a href="part-2---confidence-intervals.html#cb33-8" aria-hidden="true" tabindex="-1"></a>sample_se <span class="ot">&lt;-</span> <span class="fu">sqrt</span>(sample_pro <span class="sc">*</span> (<span class="dv">1</span> <span class="sc">-</span> sample_pro) <span class="sc">/</span> n)</span>
 <span id="cb33-9"><a href="part-2---confidence-intervals.html#cb33-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-10"><a href="part-2---confidence-intervals.html#cb33-10" aria-hidden="true" tabindex="-1"></a><span class="co">#90% Confidence Level</span></span>
-<span id="cb33-11"><a href="part-2---confidence-intervals.html#cb33-11" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.64</span><span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n) </span>
-<span id="cb33-12"><a href="part-2---confidence-intervals.html#cb33-12" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.64</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb33-11"><a href="part-2---confidence-intervals.html#cb33-11" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.64</span><span class="sc">*</span> sample_se</span>
+<span id="cb33-12"><a href="part-2---confidence-intervals.html#cb33-12" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.64</span> <span class="sc">*</span> sample_se</span>
 <span id="cb33-13"><a href="part-2---confidence-intervals.html#cb33-13" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(lower_vector, upper_vector)</span>
 <span id="cb33-14"><a href="part-2---confidence-intervals.html#cb33-14" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;90% CI&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(ci,<span class="dv">3</span>)))</span>
 <span id="cb33-15"><a href="part-2---confidence-intervals.html#cb33-15" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-16"><a href="part-2---confidence-intervals.html#cb33-16" aria-hidden="true" tabindex="-1"></a><span class="co">#95% Confidence Level</span></span>
-<span id="cb33-17"><a href="part-2---confidence-intervals.html#cb33-17" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n) </span>
-<span id="cb33-18"><a href="part-2---confidence-intervals.html#cb33-18" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb33-17"><a href="part-2---confidence-intervals.html#cb33-17" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se</span>
+<span id="cb33-18"><a href="part-2---confidence-intervals.html#cb33-18" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">1.96</span> <span class="sc">*</span> sample_se</span>
 <span id="cb33-19"><a href="part-2---confidence-intervals.html#cb33-19" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(lower_vector, upper_vector)</span>
 <span id="cb33-20"><a href="part-2---confidence-intervals.html#cb33-20" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;95% CI&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(ci,<span class="dv">3</span>)))</span>
 <span id="cb33-21"><a href="part-2---confidence-intervals.html#cb33-21" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb33-22"><a href="part-2---confidence-intervals.html#cb33-22" aria-hidden="true" tabindex="-1"></a><span class="co">#99% Confidence Level</span></span>
-<span id="cb33-23"><a href="part-2---confidence-intervals.html#cb33-23" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">2.58</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n) </span>
-<span id="cb33-24"><a href="part-2---confidence-intervals.html#cb33-24" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">2.58</span> <span class="sc">*</span> sample_se <span class="sc">/</span> <span class="fu">sqrt</span>(n)</span>
+<span id="cb33-23"><a href="part-2---confidence-intervals.html#cb33-23" aria-hidden="true" tabindex="-1"></a>lower_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">-</span> <span class="fl">2.58</span> <span class="sc">*</span> sample_se</span>
+<span id="cb33-24"><a href="part-2---confidence-intervals.html#cb33-24" aria-hidden="true" tabindex="-1"></a>upper_vector <span class="ot">&lt;-</span> sample_pro <span class="sc">+</span> <span class="fl">2.58</span> <span class="sc">*</span> sample_se</span>
 <span id="cb33-25"><a href="part-2---confidence-intervals.html#cb33-25" aria-hidden="true" tabindex="-1"></a>ci <span class="ot">&lt;-</span> <span class="fu">c</span>(lower_vector, upper_vector)</span>
 <span id="cb33-26"><a href="part-2---confidence-intervals.html#cb33-26" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">&quot;99% CI&quot;</span>, <span class="fu">paste</span>(<span class="fu">round</span>(ci,<span class="dv">3</span>)))</span></code></pre></div>
 <p><br></p>
 <strong>Which interval would you expect to be wider?</strong>
-<div id="radio_NCIOWUIXAJ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_NCIOWUIXAJ" value=""></input> <span>Interval with a larger sample size</span></label><label><input type="radio" autocomplete="off" name="radio_NCIOWUIXAJ" value="answer"></input> <span>Interval with a larger confidence level</span></label>
+<div id="radio_UAGVYKMMGR" class="webex-radiogroup">
+<label><input type="radio" autocomplete="off" name="radio_UAGVYKMMGR" value=""></input> <span>Interval with a larger sample size</span></label><label><input type="radio" autocomplete="off" name="radio_UAGVYKMMGR" value="answer"></input> <span>Interval with a larger confidence level</span></label>
 </div>
 <div class="webex-solution">
 <button>
